@@ -1,0 +1,9 @@
+.app-control-container {}
+
+.app-control-container-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 1rem 0;
+  padding: 0 5rem;
+}

@@ -1,0 +1,20 @@
+.app-event-selection-container {
+  min-width: 200px;
+}
+
+.app-event-selection-container .MuiFormControl-root {
+  width: 100%;
+}
+
+.app-event-selection-container .MuiSelect-selectMenu,
+.app-event-selection-container .MuiSelect-nativeInput,
+.app-event-selection-container .MuiSelect-icon,
+.app-event-selection-container {
+  color: #fff;
+}
+
+.app-event-selection-container .MuiInput-underline:before,
+.app-event-selection-container .MuiInput-underline:after,
+.app-event-selection-container .MuiInput-underline:hover:not(.Mui-disabled):before {
+  border-bottom-color: #fff;
+}

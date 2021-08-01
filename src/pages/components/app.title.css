@@ -1,0 +1,12 @@
+.title-container {}
+
+.title-container-main-text {
+  font-size: 3rem !important;
+  display: flex;
+  justify-content: center;
+  padding: 30px 0;
+  color: #fff;
+  background: #0000004f;
+  border-radius: 25px;
+  margin-top: 15px !important;
+}
