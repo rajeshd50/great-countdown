@@ -18,7 +18,14 @@ const StaticCard = ({ position, digit }: any) => {
   );
 };
 
-const FlipTimer = ({ digit, shuffle, unit }: any) => {
+interface FlipTimerProps {
+  digit: any;
+  shuffle: any;
+  unit: any;
+  display: 'small' | 'large';
+}
+
+const FlipTimer = ({ digit, shuffle, unit, display }: FlipTimerProps) => {
   // assign digit values
   let currentDigit: any = digit;
   let previousDigit: any = digit + 1;
@@ -60,7 +67,7 @@ const FlipTimer = ({ digit, shuffle, unit }: any) => {
     : 'unfold';
 
   return (
-    <div className={'flipUnitContainer'}>
+    <div className={`flipUnitContainer ${display === 'small' ? 'small-flipUnitContainer' : ''}`}>
       <StaticCard
         position={'upperCard'}
         digit={currentDigit}

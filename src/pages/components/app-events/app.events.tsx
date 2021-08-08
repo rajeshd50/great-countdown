@@ -55,8 +55,9 @@ export interface AppEventState {
 export interface AppEvent {
   date: Date;
   name: string;
-  notificationType?: 'never' | 'each-minute' | 'each-hour' | 'each-day' | 'each-week' | 'each-month',
+  notificationType?: 'never' | 'each-minute' | 'each-hour' | 'each-day' | 'each-week' | 'each-month' | 'once-finished',
   id?: string;
+  lastNotificationSent?: Date;
 }
 
 const WhiteTextField = withStyles({
@@ -264,9 +265,13 @@ function AppEvents() {
   return (
     <React.Fragment>
       <div className="app-event-open-button-container">
-        <IconButton onClick={handleOpen}>
-          <EventAvailableIcon />
-        </IconButton>
+        <Button
+          variant="outlined"
+          startIcon={<EventAvailableIcon />}
+          onClick={handleOpen}
+        >
+          Events
+        </Button>
       </div>
       <Modal
         open={open}
@@ -388,6 +393,7 @@ function AppEvents() {
                               <MenuItem value={'each-day'}>Every Day</MenuItem>
                               <MenuItem value={'each-week'}>Every Week</MenuItem>
                               <MenuItem value={'each-month'}>Every Month</MenuItem>
+                              <MenuItem value={'once-finished'}>Once Finished</MenuItem>
                             </Select>
                             {errors && errors.notificationType && errors.notificationType.message ? <FormHelperText error>{errors.notificationType.message}</FormHelperText> : null}
 

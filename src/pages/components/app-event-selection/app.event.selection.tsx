@@ -21,10 +21,12 @@ interface AppEventSelected {
 
 interface AppEventSelectionProps {
   setParentSelectedEvent?: (event: AppEvent | null) => void;
+  setParentAllEvents?: (events: AppEvent[]) => void;
 }
 
 function AppEventSelection({
   setParentSelectedEvent,
+  setParentAllEvents,
 }: AppEventSelectionProps) {
   const [currentEvent, setCurrentEvent] = useState('')
   const [eventKeyLoaded, setEventKeyLoaded] = useState(false);
@@ -106,6 +108,10 @@ function AppEventSelection({
       }
     }
   }, [currentEvent])
+
+  useEffect(() => {
+    setParentAllEvents && setParentAllEvents(appEvents.events)
+  }, [appEvents.events])
 
   const storageChangeListener = (changes: any, area: string) => {
     if (area == 'sync' && changes && changes[STORAGE_KEYS.EVENTS] && changes[STORAGE_KEYS.EVENTS].newValue) {
