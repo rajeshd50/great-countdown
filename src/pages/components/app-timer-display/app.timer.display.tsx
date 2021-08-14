@@ -56,6 +56,12 @@ function AppTimerDisplay({
 
   useEffect(() => {
     if (eventTime && !timerStarted) {
+
+      if (moment().isAfter(eventTime)) {
+        deleteTimer()
+        return
+      }
+
       timerStarted = true
       timerID = setInterval(
         () => updateTime(),
@@ -70,6 +76,22 @@ function AppTimerDisplay({
       }
     }
   }, [eventTime, daysTimerState, hoursTimerState, minutesTimerState, secondsTimerState])
+
+  const deleteTimer = () => {
+    if (timerID) {
+      clearInterval(timerID)
+      timerID = null
+      timerStarted = false
+    }
+    // delete the event
+    chrome.storage.sync.get(STORAGE_KEYS.EVENTS, (items) => {
+      if (items[STORAGE_KEYS.EVENTS] && items[STORAGE_KEYS.EVENTS].length) {
+        chrome.storage.sync.set({
+          [STORAGE_KEYS.EVENTS]: items[STORAGE_KEYS.EVENTS].filter((x: any) => x.id !== event.id)
+        }, () => { })
+      }
+    })
+  }
   const updateTime = () => {
     // get new date
     const time = eventTime;
@@ -144,14 +166,7 @@ function AppTimerDisplay({
       notificationSender.addNotification(event)
     }
     if (isFinished) {
-      // delete the event
-      chrome.storage.sync.get(STORAGE_KEYS.EVENTS, (items) => {
-        if (items[STORAGE_KEYS.EVENTS] && items[STORAGE_KEYS.EVENTS].length) {
-          chrome.storage.sync.set({
-            [STORAGE_KEYS.EVENTS]: items[STORAGE_KEYS.EVENTS].filter((x: any) => x.id !== event.id)
-          }, () => { })
-        }
-      })
+      deleteTimer()
     }
   }
   return (

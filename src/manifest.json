@@ -1,17 +1,14 @@
 {
   "manifest_version": 3,
   "name": "Great Countdown",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "background": {
     "service_worker": "background.bundle.js"
   },
   "permissions": [
     "storage",
-    "idle",
-    "management",
     "notifications",
-    "tabs",
-    "https://*/*"
+    "tabs"
   ],
   "action": {
     "default_icon": "icon-34.png"
